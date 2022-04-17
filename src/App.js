@@ -9,21 +9,29 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ProtectedRoute } from './components';
 
 // Views
-import { Home, Login } from './views';
+import { Home, Login, SignUp, Status, Settings } from './views';
+
+// Context
+import { Account } from './views/Login/Account';
 
 function App() {
   return (
     <div className="app">
-      <BrowserRouter>
-        <Routes>
-          <Route exact path={routes.login.path} element={ <Login /> } />
+      <Account>
+        <Status />
+        <Settings />
+        <BrowserRouter>
+          <Routes>
+            <Route exact path={routes.login.path} element={ <Login /> } />
+          
 
 
-          <Route element={ <ProtectedRoute/> }>
-            <Route exact path={routes.home.path} element={ <Home /> } />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+            <Route element={ <ProtectedRoute/> }>
+              <Route exact path={routes.home.path} element={ <Home /> } />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </Account>
     </div>
   );
 }

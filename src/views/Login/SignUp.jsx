@@ -1,23 +1,21 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 
-import { AccountContext } from './Account';
+import UserPool from '../../utils/aws/UserPool';
 
-const Login = () => {
+const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  const { authenticate } = useContext(AccountContext);
 
   const onSubmit = (event) => {
     event.preventDefault();
 
-    authenticate(email, password)
-      .then((data) => {
-        console.log('Logged in!', data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    UserPool.signUp(email, password, [], null, (err, data) => {
+      if (err) {
+        console.error(err);
+      }
+
+      console.log(data);
+    });
   };
 
   return (
@@ -42,10 +40,10 @@ const Login = () => {
           />
         </div>
 
-        <button type='submit'>Login!</button>
+        <button type='submit'>Sign Up!</button>
       </form>
     </div>
   );
 };
 
-export default Login;
+export default SignUp;
