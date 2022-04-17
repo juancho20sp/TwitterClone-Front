@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 // Redux
 import { useDispatch } from 'react-redux';
-import { login, logout } from '../../../redux/slices/loginSlice';
+import { login, logout as reduxLogout } from '../../../redux/slices/loginSlice';
 
 // AWS
 import { CognitoUser, AuthenticationDetails } from 'amazon-cognito-identity-js';
@@ -104,7 +104,7 @@ const useAccount = () => {
 
         if (user) {
             user.signOut();
-            dispatch(logout());
+            dispatch(reduxLogout());
         }
     };
 
