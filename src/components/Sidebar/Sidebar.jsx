@@ -13,17 +13,16 @@ import ExitToApp from '@material-ui/icons/ExitToApp';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import { Button } from '@material-ui/core';
 
-// Redux
-import { useDispatch } from 'react-redux';
-import { logout } from '../../redux/slices/loginSlice';
+// Hooks
+import { useAccount } from '../../utils/aws/hooks';
 
 function Sidebar() {
-  const dispatch = useDispatch();
+  const { logout } = useAccount();
 
   const handleLogout = (event) => {
     event.preventDefault();
 
-    dispatch(logout());
+    logout();
   };
 
   return (

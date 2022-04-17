@@ -4,15 +4,16 @@ export const loginSlice = createSlice({
     name: 'login',
     initialState: {
         isLoggedIn: false,
-        username: '',
-        email: '',
-        firstName: '',
-        lastName: '',
-        phone: ''
+        awsUserData: ''
     },
     reducers: {
         login: (state, action) => {
             state.isLoggedIn = true;
+
+            if (action.payload) {
+                state.awsUserData = {...JSON.parse(action.payload)};
+            }
+
         },
         logout: (state, action) => {
             state.isLoggedIn = false;

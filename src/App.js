@@ -6,32 +6,28 @@ import { routes } from './utils';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 // Components
-import { ProtectedRoute } from './components';
+import { ProtectedRoute, UnprotectedRoute } from './components';
 
 // Views
 import { Home, Login, SignUp, Status, Settings } from './views';
 
-// Context
-import { Account } from './views/Login/Account';
-
 function App() {
   return (
     <div className="app">
-      <Account>
-        <Status />
-        <Settings />
-        <BrowserRouter>
-          <Routes>
+        {/* <Status />
+        <Settings /> */}
+      <BrowserRouter>
+        <Routes>
+          <Route element={<UnprotectedRoute />}>
             <Route exact path={routes.login.path} element={ <Login /> } />
-          
-
-
-            <Route element={ <ProtectedRoute/> }>
-              <Route exact path={routes.home.path} element={ <Home /> } />
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </Account>
+          </Route>
+          <Route exact path={routes.signUp.path} element={ <SignUp /> } />
+        
+          <Route element={ <ProtectedRoute/> }>
+            <Route exact path={routes.home.path} element={ <Home /> } />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

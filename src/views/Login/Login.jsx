@@ -1,12 +1,13 @@
 import React, { useState, useContext } from 'react';
 
-import { AccountContext } from './Account';
+// Hooks
+import { useAccount } from '../../utils/aws/hooks';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('test@test.com');
+  const [password, setPassword] = useState('Escuela22*');
 
-  const { authenticate } = useContext(AccountContext);
+  const { authenticate } = useAccount();
 
   const onSubmit = (event) => {
     event.preventDefault();

@@ -4,7 +4,7 @@ const routes = {
         path: '/login',
         name: 'login'
     },
-    signIn: {
+    signUp: {
         id: 1,
         path: '/createAccount',
         name: 'signIn'

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
 // Routing
-import { routes } from '../../utils';
+import routes from '../../utils/routing/routes';
 import { Navigate, Outlet } from 'react-router-dom';
 
 // Redux
@@ -11,18 +11,18 @@ import { login } from '../../redux/slices/loginSlice';
 // Hooks
 import { useAccount } from '../../utils/aws/hooks';
 
-const ProtectedRoute = ({ children }) => {
-  const { getSession } = useAccount();
+const UnprotectedRoute = ({ children }) => {
+  //   const { getSession } = useAccount();
 
-  useEffect(() => {
-    getSession().then(() => {
-      login();
-    });
-  }, []);
+  //   useEffect(() => {
+  //     getSession().then(() => {
+  //       login();
+  //     });
+  //   }, []);
 
   const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
 
-  return isLoggedIn ? <Outlet /> : <Navigate to={routes.login.path} replace />;
+  return isLoggedIn ? <Navigate to={routes.home.path} replace /> : <Outlet />;
 };
 
-export default ProtectedRoute;
+export default UnprotectedRoute;
