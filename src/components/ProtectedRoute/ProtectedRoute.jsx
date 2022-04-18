@@ -15,7 +15,10 @@ const ProtectedRoute = ({ children }) => {
   const { getSession } = useAccount();
 
   useEffect(() => {
-    getSession().then(() => {
+    getSession().then((data) => {
+      // $
+      debugger;
+
       login();
     });
   }, []);

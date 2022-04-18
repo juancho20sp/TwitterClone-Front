@@ -18,7 +18,8 @@ export const loginSlice = createSlice({
     name: 'login',
     initialState: getFromLocalStorage('globalState') ? getFromLocalStorage('globalState') : {
         isLoggedIn: false,
-        awsUserData: {}
+        awsUserData: {},
+        userData: {}
     },
     reducers: {
         login: (state, action) => {
@@ -35,13 +36,17 @@ export const loginSlice = createSlice({
             state.awsUserData = {};
 
             saveToLocalStorage(state);
+        },
+        setUserData: (state, action) => {
+            state.userData = {...action.payload};
         }
     }
 });
 
 export const {
     login,
-    logout
+    logout,
+    setUserData
 } = loginSlice.actions;
 
 export default loginSlice.reducer;

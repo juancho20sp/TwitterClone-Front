@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 // Redux
 import { useDispatch } from 'react-redux';
-import { login, logout as reduxLogout } from '../../../redux/slices/loginSlice';
+import { login, logout as reduxLogout, setUserData } from '../../../redux/slices/loginSlice';
 
 // AWS
 import { CognitoUser, AuthenticationDetails } from 'amazon-cognito-identity-js';
@@ -27,27 +27,27 @@ const useAccount = () => {
 
             if (user) {
                 user.getSession(async (err, session) => {
-                if (err) {
-                    reject();
-                }
-
-                const attributes = await new Promise((resolve, reject) => {
-                    user.getUserAttributes((err, attributes) => {
                     if (err) {
                         reject();
                     }
 
-                    const results = {};
-                    for (let attribute of attributes) {
-                        const { Name, Value } = attribute;
-                        results[Name] = Value;
-                    }
+                    const attributes = await new Promise((resolve, reject) => {
+                        user.getUserAttributes((err, attributes) => {
+                        if (err) {
+                            reject();
+                        }
 
-                    resolve(results);
+                        const results = {};
+                        for (let attribute of attributes) {
+                            const { Name, Value } = attribute;
+                            results[Name] = Value;
+                        }
+
+                        resolve(results);
+                        });
                     });
-                });
 
-                resolve({ user, ...session, ...attributes });
+                    resolve({ user, ...session, attributes });
                 });
             } else {
                 reject();
@@ -78,7 +78,13 @@ const useAccount = () => {
                     console.log(data);
                     resolve(data);
 
-                    dispatch(login(JSON.stringify(data)));   
+                    dispatch(login(JSON.stringify(data))); 
+                    
+                    // Set user attributes
+                    getSession().then(({attributes}) =>{
+                        dispatch(setUserData(attributes));
+                    });
+
                     navigate(routes.home.path);                 
                 },
                 onFailure: (err) => {
@@ -90,6 +96,12 @@ const useAccount = () => {
                     resolve(data);
 
                     dispatch(login(JSON.stringify(data)));
+
+                    // Set user attributes
+                    getSession().then(({attributes}) =>{
+                        dispatch(setUserData(attributes));
+                    });
+
                     navigate(routes.home.path); 
                 },
             });

@@ -1,9 +1,15 @@
 import React, { useState, useContext } from 'react';
 
+// Routing
+import routes from '../../utils/routing/routes';
+import { useNavigate } from 'react-router-dom';
+
 // Hooks
 import { useAccount } from '../../utils/aws/hooks';
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState('test@test.com');
   const [password, setPassword] = useState('Escuela22*');
 
@@ -19,6 +25,12 @@ const Login = () => {
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  const handleSignUp = (event) => {
+    event.preventDefault();
+
+    navigate(routes.signUp.path);
   };
 
   return (
@@ -43,6 +55,7 @@ const Login = () => {
           />
         </div>
 
+        <button onClick={handleSignUp}>Sign up</button>
         <button type='submit'>Login!</button>
       </form>
     </div>
