@@ -1,0 +1,8 @@
+Tweet: {
+    avatar: String,
+    displayName: String,
+    image: String,
+    text: String
+    username: String,
+    verified: Boolean
+}

@@ -7,11 +7,11 @@ const Home = () => {
     <div className='home'>
       <Sidebar />
 
-      {/* <Feed /> */}
+      <Feed />
 
       {/* // $ */}
       {/* AQUÍ HAY UN PROBLEMA DE REFERENCIAS */}
-      {/* <Widgets /> */}
+      <Widgets />
     </div>
   );
 };
