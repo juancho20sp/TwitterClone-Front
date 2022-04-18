@@ -25,6 +25,13 @@ function Sidebar() {
     logout();
   };
 
+  const handleLoadMore = (event) => {
+    event.preventDefault();
+
+    // $
+    console.log('Loading more tweets...');
+  };
+
   return (
     <div className='sidebar'>
       <TwitterIcon className='sidebar__twitterIcon' />
@@ -39,8 +46,13 @@ function Sidebar() {
       <SidebarOption Icon={ExitToApp} text='Logout' onClick={handleLogout} />
       <SidebarOption Icon={MoreHorizIcon} text='More' />
 
-      <Button variant='outlined' className='sidebar__tweet' fullWidth>
-        Tweet
+      <Button
+        variant='outlined'
+        className='sidebar__tweet'
+        fullWidth
+        onClick={handleLoadMore}
+      >
+        Load more
       </Button>
     </div>
   );

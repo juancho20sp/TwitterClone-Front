@@ -1,6 +1,7 @@
 - Información: https://www.youtube.com/watch?v=8WZmIdXZe3Q&list=PLDckhLrNepPR8y-9mDXsLutiwsLhreOk1
 - Entrar a cognito en AWS
     - Configurar todo
+        - En la parte de clientes de aplicación -> quitamos el check de 'Generar clave secreta de cliente' 
 - Configurar un DNS
 
 COMANDOS IMPORTANTES:

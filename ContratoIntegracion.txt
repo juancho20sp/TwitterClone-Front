@@ -4,5 +4,5 @@ Tweet: {
     image: String,
     text: String
     username: String,
-    verified: Boolean
+    verified: Boolean -> Posiblemente número (0: No - 1: Si)
 }
