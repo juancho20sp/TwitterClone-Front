@@ -76,6 +76,8 @@ const SignUp = () => {
             'Ya puedes ingresar al sistema con tu cuenta',
             'success'
           );
+
+          navigate(routes.login.path);
         }
       }
     );

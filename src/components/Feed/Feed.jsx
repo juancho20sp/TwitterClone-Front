@@ -14,34 +14,11 @@ function Feed() {
       username: 'ElPepe',
       verified: true,
     },
-    {
-      avatar:
-        'https://www.pngfind.com/pngs/m/7-71783_pepe-the-frog-smirk-pepe-hd-png-download.png',
-      displayName: 'El Pepe',
-      image: '',
-      text: 'Como eeeees',
-      username: 'ElPepe',
-      verified: true,
-    },
-    {
-      avatar:
-        'https://www.pngfind.com/pngs/m/7-71783_pepe-the-frog-smirk-pepe-hd-png-download.png',
-      displayName: 'El Pepe',
-      image: '',
-      text: 'Como eeeees',
-      username: 'ElPepe',
-      verified: true,
-    },
-    {
-      avatar:
-        'https://www.pngfind.com/pngs/m/7-71783_pepe-the-frog-smirk-pepe-hd-png-download.png',
-      displayName: 'El Pepe',
-      image: '',
-      text: 'Como eeeees',
-      username: 'ElPepe',
-      verified: true,
-    },
   ]);
+
+  const addTweet = (tweet) => {
+    setPosts((posts) => [...posts, tweet]);
+  };
 
   return (
     <div className='feed'>
@@ -49,7 +26,7 @@ function Feed() {
         <h2>Home</h2>
       </div>
 
-      <TweetBox />
+      <TweetBox addTweet={addTweet} />
 
       {posts.map((post, idx) => (
         <Post

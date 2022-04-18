@@ -5,25 +5,31 @@ import { Avatar, Button } from '@material-ui/core';
 // Redux
 import { useSelector } from 'react-redux';
 
-function TweetBox() {
+function TweetBox({ addTweet }) {
   const userAttributes = useSelector((state) => state.login.userData);
   const [tweetMessage, setTweetMessage] = useState('');
   const [tweetImage, setTweetImage] = useState('');
 
-  const { 'custom:avatar': avatarUrl } = userAttributes;
+  const {
+    'custom:avatar': avatarUrl,
+    'custom:displayName': displayName,
+    'custom:username': username,
+    email_verified,
+  } = userAttributes;
 
   const sendTweet = (e) => {
     e.preventDefault();
 
-    // db.collection('posts').add({
-    //   displayName: 'Mark Mark',
-    //   username: 'Markkkk',
-    //   verified: true,
-    //   text: tweetMessage,
-    //   image: tweetImage,
-    //   avatar:
-    //     'https://www.pngfind.com/pngs/m/14-141135_download-mark-zuckerberg-png-image-mark-zuckerberg-transparent.png',
-    // });
+    const tweet = {
+      displayName,
+      username,
+      verified: email_verified === 'true' ? true : false,
+      text: tweetMessage,
+      image: tweetImage,
+      avatar: avatarUrl,
+    };
+
+    addTweet(tweet);
 
     setTweetMessage('');
     setTweetImage('');
