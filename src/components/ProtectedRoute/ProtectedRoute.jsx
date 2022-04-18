@@ -5,7 +5,7 @@ import { routes } from '../../utils';
 import { Navigate, Outlet } from 'react-router-dom';
 
 // Redux
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { login } from '../../redux/slices/loginSlice';
 
 // Hooks
@@ -15,10 +15,7 @@ const ProtectedRoute = ({ children }) => {
   const { getSession } = useAccount();
 
   useEffect(() => {
-    getSession().then((data) => {
-      // $
-      debugger;
-
+    getSession().then(() => {
       login();
     });
   }, []);

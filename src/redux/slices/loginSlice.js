@@ -39,6 +39,8 @@ export const loginSlice = createSlice({
         },
         setUserData: (state, action) => {
             state.userData = {...action.payload};
+
+            saveToLocalStorage(state);
         }
     }
 });

@@ -1,10 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './TweetBox.css';
 import { Avatar, Button } from '@material-ui/core';
 
+// Redux
+import { useSelector } from 'react-redux';
+
 function TweetBox() {
+  const userAttributes = useSelector((state) => state.login.userData);
   const [tweetMessage, setTweetMessage] = useState('');
   const [tweetImage, setTweetImage] = useState('');
+
+  const { 'custom:avatar': avatarUrl } = userAttributes;
 
   const sendTweet = (e) => {
     e.preventDefault();
@@ -27,7 +33,7 @@ function TweetBox() {
     <div className='tweetBox'>
       <form>
         <div className='tweetBox__input'>
-          <Avatar src='https://www.pngfind.com/pngs/m/14-141135_download-mark-zuckerberg-png-image-mark-zuckerberg-transparent.png' />
+          <Avatar src={avatarUrl} />
           <input
             onChange={(e) => setTweetMessage(e.target.value)}
             value={tweetMessage}

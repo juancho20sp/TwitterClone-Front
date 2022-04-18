@@ -13,11 +13,22 @@ import ExitToApp from '@material-ui/icons/ExitToApp';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import { Button } from '@material-ui/core';
 
+// Routing
+import { routes } from '../../utils';
+import { useNavigate } from 'react-router-dom';
+
 // Hooks
 import { useAccount } from '../../utils/aws/hooks';
 
 function Sidebar() {
+  const navigate = useNavigate();
   const { logout } = useAccount();
+
+  const handleProfile = (event) => {
+    event.preventDefault();
+
+    navigate(routes.profile.path);
+  };
 
   const handleLogout = (event) => {
     event.preventDefault();
@@ -42,7 +53,11 @@ function Sidebar() {
       <SidebarOption Icon={MailOutlineIcon} text='Messages' />
       <SidebarOption Icon={BookmarkBorderIcon} text='Bookmarks' />
       <SidebarOption Icon={ListAltIcon} text='Lists' />
-      <SidebarOption Icon={PermIdentityIcon} text='Profile' />
+      <SidebarOption
+        Icon={PermIdentityIcon}
+        text='Profile'
+        onClick={handleProfile}
+      />
       <SidebarOption Icon={ExitToApp} text='Logout' onClick={handleLogout} />
       <SidebarOption Icon={MoreHorizIcon} text='More' />
 
