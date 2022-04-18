@@ -10,8 +10,8 @@ import { useAccount } from '../../utils/aws/hooks';
 const Login = () => {
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState('test@test.com');
-  const [password, setPassword] = useState('Escuela22*');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const { authenticate } = useAccount();
 
