@@ -5,21 +5,9 @@ import routes from '../../utils/routing/routes';
 import { Navigate, Outlet } from 'react-router-dom';
 
 // Redux
-import { useSelector, useDispatch } from 'react-redux';
-import { login } from '../../redux/slices/loginSlice';
-
-// Hooks
-import { useAccount } from '../../utils/aws/hooks';
+import { useSelector } from 'react-redux';
 
 const UnprotectedRoute = ({ children }) => {
-  //   const { getSession } = useAccount();
-
-  //   useEffect(() => {
-  //     getSession().then(() => {
-  //       login();
-  //     });
-  //   }, []);
-
   const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
 
   return isLoggedIn ? <Navigate to={routes.home.path} replace /> : <Outlet />;

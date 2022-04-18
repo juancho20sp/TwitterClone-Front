@@ -9,7 +9,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ProtectedRoute, UnprotectedRoute } from './components';
 
 // Views
-import { Home, Login, SignUp, Status, Settings } from './views';
+import { Home, Login, SignUp, Profile } from './views';
 
 function App() {
   return (
@@ -25,6 +25,7 @@ function App() {
         
           <Route element={ <ProtectedRoute/> }>
             <Route exact path={routes.home.path} element={ <Home /> } />
+            <Route exact path={routes.profile.path} element={ <Profile /> } />
           </Route>
         </Routes>
       </BrowserRouter>

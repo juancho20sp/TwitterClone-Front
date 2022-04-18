@@ -22,9 +22,6 @@ function Sidebar() {
   const handleLogout = (event) => {
     event.preventDefault();
 
-    // $
-    debugger;
-
     logout();
   };
 

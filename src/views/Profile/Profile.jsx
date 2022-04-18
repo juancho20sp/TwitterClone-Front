@@ -1,11 +1,16 @@
-import React, { useState, useContext } from 'react';
-import { AccountContext } from './Account';
+import React, { useState } from 'react';
 
-const ChangePassword = () => {
+// Elements
+import swal from 'sweetalert';
+
+// Hooks
+import { useAccount } from '../../utils/aws/hooks';
+
+const Profile = () => {
   const [password, setPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
 
-  const { getSession } = useContext(AccountContext);
+  const { getSession } = useAccount();
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -14,8 +19,18 @@ const ChangePassword = () => {
       user.changePassword(password, newPassword, (err, result) => {
         if (err) {
           console.error(err);
+          swal(
+            'Algo salió mal',
+            'Inténtalo nuevamente o ponte en contacto con los administradores del sitio :c',
+            'error'
+          );
         } else {
           console.log(result);
+          swal(
+            'Cambio de contraseña exitoso',
+            'Desde ahora deberás utilizar tu nueva contraseña',
+            'success'
+          );
         }
       });
     });
@@ -50,4 +65,4 @@ const ChangePassword = () => {
   );
 };
 
-export default ChangePassword;
+export default Profile;
