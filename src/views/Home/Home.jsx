@@ -9,8 +9,6 @@ const Home = () => {
 
       <Feed />
 
-      {/* // $ */}
-      {/* AQUÍ HAY UN PROBLEMA DE REFERENCIAS */}
       <Widgets />
     </div>
   );
