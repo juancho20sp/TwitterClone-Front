@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import './Login.css';
 
 // Routing
 import routes from '../../utils/routing/routes';
@@ -34,8 +35,9 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={onSubmit}>
+    <div className='login-container'>
+      <form onSubmit={onSubmit} className='login-form'>
+        <h2>Bienvenido a Twitter</h2>
         <div>
           <label htmlFor='email'>Email</label>
           <input
@@ -55,8 +57,10 @@ const Login = () => {
           />
         </div>
 
-        <button onClick={handleSignUp}>Sign up</button>
-        <button type='submit'>Login!</button>
+        <div className='login-form__buttons'>
+          <button onClick={handleSignUp}>Sign up</button>
+          <button type='submit'>Login!</button>
+        </div>
       </form>
     </div>
   );

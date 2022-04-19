@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './SignUp.css';
 
 // Elements
 import swal from 'sweetalert';
@@ -25,6 +26,10 @@ const SignUp = () => {
   const [avatarUrl, setAvatarUrl] = useState('');
 
   const [error, setError] = useState('');
+
+  const onCancel = (event) => {
+    event.preventDefault();
+  };
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -84,8 +89,9 @@ const SignUp = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={onSubmit}>
+    <div className='signUp-container'>
+      <form onSubmit={onSubmit} className='signUp-form'>
+        <h2>Crea tu cuenta</h2>
         <div>
           <label htmlFor='firstname'>Firstname</label>
           <input
@@ -166,6 +172,7 @@ const SignUp = () => {
 
         {error && <p>Algo salió mal, por favor verifique las entradas</p>}
 
+        <button onClick={onCancel}>Cancelar</button>
         <button type='submit'>Sign Up!</button>
       </form>
     </div>
