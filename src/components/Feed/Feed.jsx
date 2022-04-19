@@ -3,21 +3,63 @@ import React, { useEffect, useState } from 'react';
 import './Feed.css';
 import { Post, TweetBox } from '..';
 
+// Utils
+import { post } from '../../utils';
+
+// Elements
+import swal from 'sweetalert';
+
+// {
+//   avatar:
+//     'https://www.pngfind.com/pngs/m/7-71783_pepe-the-frog-smirk-pepe-hd-png-download.png',
+//   displayName: 'El Pepe',
+//   image: '',
+//   text: 'Como eeeees',
+//   username: 'ElPepe',
+//   verified: true,
+// },
+
 function Feed() {
-  const [posts, setPosts] = useState([
-    {
-      avatar:
-        'https://www.pngfind.com/pngs/m/7-71783_pepe-the-frog-smirk-pepe-hd-png-download.png',
-      displayName: 'El Pepe',
-      image: '',
-      text: 'Como eeeees',
-      username: 'ElPepe',
-      verified: true,
-    },
-  ]);
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        let data = await fetch(`${process.env.REACT_APP_BASE_URL}/feed`);
+        data = await data.json();
+
+        return data;
+      } catch (err) {
+        console.error(err);
+        throw new Error(err);
+      }
+    };
+
+    fetchData()
+      .then((data) => {
+        setPosts((posts) => [...data, ...posts]);
+      })
+      .catch((err) => {
+        swal(
+          'No podemos cargar tu feed',
+          'Inténtalo nuevamente o ponte en contacto con los administradores del sitio :c',
+          'error'
+        );
+      });
+  }, []);
 
   const addTweet = (tweet) => {
-    setPosts((posts) => [...posts, tweet]);
+    try {
+      post(`${process.env.REACT_APP_BASE_URL}/post`, tweet).then((newTweet) => {
+        setPosts((posts) => [...newTweet, ...posts]);
+      });
+    } catch (err) {
+      swal(
+        'Algo salió mal',
+        'Inténtalo nuevamente o ponte en contacto con los administradores del sitio :c',
+        'error'
+      );
+    }
   };
 
   return (
@@ -28,17 +70,18 @@ function Feed() {
 
       <TweetBox addTweet={addTweet} />
 
-      {posts.map((post, idx) => (
-        <Post
-          key={idx}
-          displayName={post.displayName}
-          username={post.username}
-          verified={post.verified}
-          text={post.text}
-          avatar={post.avatar}
-          image={post.image}
-        />
-      ))}
+      {posts.length > 0 &&
+        posts.map((post, idx) => (
+          <Post
+            key={idx}
+            displayName={post.displayName}
+            username={post.username}
+            verified={post.verified}
+            text={post.text}
+            avatar={post.avatar}
+            image={post.image}
+          />
+        ))}
     </div>
   );
 }

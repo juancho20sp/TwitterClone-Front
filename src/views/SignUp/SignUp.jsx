@@ -27,8 +27,15 @@ const SignUp = () => {
 
   const [error, setError] = useState('');
 
+  const clearData = () => {
+    setEmail('');
+  };
+
   const onCancel = (event) => {
     event.preventDefault();
+
+    clearData();
+    navigate(routes.login.path);
   };
 
   const onSubmit = (event) => {
