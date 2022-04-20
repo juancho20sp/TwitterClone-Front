@@ -1,18 +1,110 @@
 .signUp-container {
+    background-color: #242D34;
+
     width: 100vw;
     height: 100vh;
+
+    font-family: TwitterChirp, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.signUp-form {
-    border: 2px solid black;
+.login-form_container {
+    width: 600px;
+    height: 650px;
+}
 
-    width: 30%;
-    height: 60%;
+
+.signUp-form {
+    background-color: black;
+    border: 2px solid black;
+    border-radius: 20px;
+
+    color: white;
+
+    /* width: 50%; */
+    height: 650px;
+
+    padding: 0 100px;
 
     display: flex;
     flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.signUp-form svg {
+    width: 40px;
+    height: 40px;
+
+    margin: 0 auto;
+}
+
+.signUp-form h2 {
+    color: rgb(231, 233, 234);
+    
+
+    line-height: 36px;
+    font-size: 31px;
+    font-weight: 700;
+}
+
+.signUp-form div label {
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+
+    text-align: center;
+    visibility: hidden;
+}
+
+.signUp-form input {
+    background-color: transparent;
+    border-radius: 5px;
+
+    height: 60px;
+    width: 98%;
+
+    color: white;
+
+    font-size: 1.2rem;
+}
+
+.signUp-form button {
+    background-color: white;
+    border-radius: 50px;
+    color: black;
+
+    height: 40px;
+    width: 100%;
+
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.signUp-form button:hover {
+    cursor: pointer;
+}
+
+.row {
+    display: flex;
+}
+
+.row div:first-child {
+    margin-right: 15px;
+}
+
+.signIn {
+    color: rgb(113, 118, 123);
+}
+
+.signIn span{
+    color: rgb(29, 155, 240);
+}
+
+.signIn span:hover{
+    cursor: pointer;
+    text-decoration: underline;
 }
