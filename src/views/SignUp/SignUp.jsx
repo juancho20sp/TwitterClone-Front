@@ -14,8 +14,12 @@ import UserPool from '../../utils/aws/UserPool';
 import routes from '../../utils/routing/routes';
 import { useNavigate } from 'react-router-dom';
 
+// Components
+import { Loader } from '../../components';
+
 const SignUp = () => {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -44,61 +48,69 @@ const SignUp = () => {
   const onSubmit = (event) => {
     event.preventDefault();
 
-    UserPool.signUp(
-      email,
-      password,
-      [
-        {
-          Name: 'name',
-          Value: firstname,
-        },
-        {
-          Name: 'family_name',
-          Value: lastname,
-        },
-        {
-          Name: 'custom:username',
-          Value: username,
-        },
-        {
-          Name: 'custom:displayName',
-          Value: displayName,
-        },
-        {
-          Name: 'custom:verified',
-          Value: verified,
-        },
-        {
-          Name: 'custom:avatar',
-          Value: avatarUrl,
-        },
-      ],
-      null,
-      (err, data) => {
-        if (err) {
-          console.error(err);
-          setError(err);
-          swal(
-            'Algo salió mal',
-            'Inténtalo nuevamente o ponte en contacto con los administradores del sitio :c',
-            'error'
-          );
-        }
+    setIsLoading(true);
 
-        if (data) {
-          swal(
-            'Usuario registrado exitosamente',
-            'Ya puedes ingresar al sistema con tu cuenta',
-            'success'
-          );
+    if (password === confirmPassword) {
+      UserPool.signUp(
+        email,
+        password,
+        [
+          {
+            Name: 'name',
+            Value: firstname,
+          },
+          {
+            Name: 'family_name',
+            Value: lastname,
+          },
+          {
+            Name: 'custom:username',
+            Value: username,
+          },
+          {
+            Name: 'custom:displayName',
+            Value: displayName,
+          },
+          {
+            Name: 'custom:verified',
+            Value: verified,
+          },
+          {
+            Name: 'custom:avatar',
+            Value: avatarUrl,
+          },
+        ],
+        null,
+        (err, data) => {
+          setIsLoading(false);
 
-          navigate(routes.login.path);
+          if (err) {
+            console.error(err);
+            setError(err);
+            swal(
+              'Algo salió mal',
+              'Inténtalo nuevamente o ponte en contacto con los administradores del sitio :c',
+              'error'
+            );
+          }
+
+          if (data) {
+            swal(
+              'Usuario registrado exitosamente',
+              'Ya puedes ingresar al sistema con tu cuenta',
+              'success'
+            );
+
+            navigate(routes.login.path);
+          }
         }
-      }
-    );
+      );
+    }
   };
 
-  return (
+  return isLoading ? (
+    <Loader />
+  ) : (
     <div className='signUp-container'>
       <div className='signUp-form_container'>
         <form onSubmit={onSubmit} className='signUp-form'>

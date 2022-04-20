@@ -14,21 +14,22 @@ import swal from 'sweetalert';
 // Icons
 import { BsTwitter } from 'react-icons/bs';
 
+// Components
+import { Loader } from '../../components';
+
 const Login = () => {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { authenticate } = useAccount();
+  const { authenticate, isLoading } = useAccount();
 
   const onSubmit = (event) => {
     event.preventDefault();
 
     authenticate(email, password)
-      .then((data) => {
-        console.log('Logged in!', data);
-      })
+      .then((data) => {})
       .catch((err) => {
         console.error(err);
 
@@ -48,7 +49,9 @@ const Login = () => {
     navigate(routes.signUp.path);
   };
 
-  return (
+  return isLoading ? (
+    <Loader />
+  ) : (
     <div className='login-container'>
       <div className='login-form_container'>
         <form onSubmit={onSubmit} className='login-form'>

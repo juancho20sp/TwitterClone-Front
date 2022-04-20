@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 // Navigation
 import  routes  from '../../routing/routes';
@@ -17,23 +17,29 @@ const useAccount = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    const [isLoading, setIsLoading] = useState(false);
+
     /**
      * Used to retrieve the current user session
      * @returns The attributes of the user || error
      */
     const getSession = async () => {
+        setIsLoading(true);
+
         return await new Promise((resolve, reject) => {
             const user = Pool.getCurrentUser();
 
             if (user) {
                 user.getSession(async (err, session) => {
                     if (err) {
+                        setIsLoading(false);
                         reject();
                     }
 
                     const attributes = await new Promise((resolve, reject) => {
                         user.getUserAttributes((err, attributes) => {
                         if (err) {
+                            setIsLoading(false);
                             reject();
                         }
 
@@ -43,13 +49,16 @@ const useAccount = () => {
                             results[Name] = Value;
                         }
 
+                        setIsLoading(false);
                         resolve(results);
                         });
                     });
 
+                    setIsLoading(false);
                     resolve({ user, ...session, attributes });
                 });
             } else {
+                setIsLoading(false);
                 reject();
             }
         });
@@ -62,6 +71,7 @@ const useAccount = () => {
      * @returns The user data || An error object
      */
     const authenticate = async (Username, Password) => {
+        setIsLoading(true);
         return await new Promise((resolve, reject) => {
             const user = new CognitoUser({
                 Username,
@@ -75,9 +85,9 @@ const useAccount = () => {
 
             user.authenticateUser(authDetails, {
                 onSuccess: (data) => {
-                    console.log(data);
+                    setIsLoading(false);
                     resolve(data);
-
+                    
                     dispatch(login(JSON.stringify(data))); 
                     
                     // Set user attributes
@@ -88,11 +98,12 @@ const useAccount = () => {
                     navigate(routes.home.path);                 
                 },
                 onFailure: (err) => {
+                    setIsLoading(false);
                     console.log(err);
                     reject(err);
                 },
                 newPasswordRequired: (data) => {
-                    console.log(data);
+                    setIsLoading(false);
                     resolve(data);
 
                     dispatch(login(JSON.stringify(data)));
@@ -112,18 +123,21 @@ const useAccount = () => {
      * Logs out the current user
      */
     const logout = () => {
+        setIsLoading(true);
         const user = Pool.getCurrentUser();
 
         if (user) {
             user.signOut();
             dispatch(reduxLogout());
+            setIsLoading(false);
         }
     };
 
   return {
     getSession,
     authenticate,
-    logout
+    logout,
+    isLoading
   }
 };
 

@@ -1,0 +1,121 @@
+.profile-container {
+    background-color: #242D34;
+
+    width: 100vw;
+    height: 100vh;
+
+    color:white;
+
+    font-family: TwitterChirp, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-form_container {
+    width: 80vw;
+    height: 70vh;
+}
+
+.profile-form {
+    background-color: black;
+    border: 2px solid black;
+    border-radius: 20px;
+
+    color: white;
+
+    height: 100%;
+
+    padding: 0 150px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.profile-form svg {
+    width: 40px;
+    height: 40px;
+
+    margin: 0 auto;
+}
+
+.profile-form h2 {
+    color: rgb(231, 233, 234);
+    
+
+    line-height: 36px;
+    font-size: 31px;
+    font-weight: 700;
+}
+
+.profile-form div {
+    position: relative;
+}
+
+.profile-form input {
+    background-color: transparent;
+    border-radius: 5px;
+
+    height: 60px;
+    width: 98%;
+
+    color: white;
+
+    font-size: 1.2rem;
+}
+
+.profile-form button {
+    background-color: white;
+    border-radius: 50px;
+    color: black;
+
+    height: 40px;
+    width: 100%;
+
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.profile-form button:hover {
+    cursor: pointer;
+}
+
+.profile-form p {
+    color: rgb(113, 118, 123);
+}
+
+.profile-form p span{
+    color: rgb(29, 155, 240);
+}
+
+.profile-form p span:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.profile-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-image-container > img {
+    width: 30%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.row {
+    display: flex;
+}
+
+.row div:first-child {
+    margin-right: 15px;
+}
+
+.row > div {
+    flex: 1;
+}

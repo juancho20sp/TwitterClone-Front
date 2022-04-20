@@ -16,9 +16,13 @@ import { useFeed } from './hooks';
 // Utils
 import { post } from '../../utils';
 
+// Components
+import { Loader } from '../';
+
 function Feed() {
   const dispatch = useDispatch();
-  const { fetchData, storeFetchedData, showErrorOnFeedLoad } = useFeed();
+  const { fetchData, storeFetchedData, showErrorOnFeedLoad, isLoading } =
+    useFeed();
 
   const posts = useSelector((state) => state.posts.posts);
 
@@ -50,7 +54,9 @@ function Feed() {
     }
   };
 
-  return (
+  return isLoading ? (
+    <Loader />
+  ) : (
     <div className='feed'>
       <div className='feed__header'>
         <h2>Home</h2>

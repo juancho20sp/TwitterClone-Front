@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './Profile.css';
 
 // Elements
 import swal from 'sweetalert';
@@ -51,75 +52,93 @@ const Profile = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={onSubmit}>
-        <div>
-          <label htmlFor='firstname'>Nombres</label>
-          <input type='text' value={firstname} id={`firstname`} disabled />
-        </div>
+    <div className='profile-container'>
+      <div className='profile-form_container'>
+        <form onSubmit={onSubmit} className='profile-form'>
+          <h2>Tu perfil</h2>
+          <div className='row'>
+            <div>
+              <label htmlFor='firstname'>Nombres</label>
+              <input type='text' value={firstname} id={`firstname`} disabled />
+            </div>
 
-        <div>
-          <label htmlFor='lastname'>Apellidos</label>
-          <input type='text' value={lastname} id={`lastname`} disabled />
-        </div>
+            <div>
+              <label htmlFor='lastname'>Apellidos</label>
+              <input type='text' value={lastname} id={`lastname`} disabled />
+            </div>
+          </div>
 
-        <div>
-          <label htmlFor='username'>Username</label>
-          <input type='text' value={username} id={`username`} disabled />
-        </div>
+          <div className='row'>
+            <div>
+              <label htmlFor='username'>Username</label>
+              <input type='text' value={username} id={`username`} disabled />
+            </div>
 
-        <div>
-          <label htmlFor='displayName'>Display name</label>
-          <input type='text' value={displayName} id={`displayName`} disabled />
-        </div>
+            <div>
+              <label htmlFor='displayName'>Display name</label>
+              <input
+                type='text'
+                value={displayName}
+                id={`displayName`}
+                disabled
+              />
+            </div>
+          </div>
 
-        <div>
-          <label htmlFor='email'>Email</label>
-          <input type='text' value={email} id={`email`} disabled />
-        </div>
+          <div className='row'>
+            <div>
+              <label htmlFor='email'>Email</label>
+              <input type='text' value={email} id={`email`} disabled />
+            </div>
 
-        <div>
-          <label htmlFor='emailConfirmed'>¿Email confirmado?</label>
-          <input
-            type='checkbox'
-            name='emailConfirmed'
-            id='emailConfirmed'
-            disabled
-            value={email_verified === 'true' ? true : false}
-          />
-        </div>
+            <div>
+              <label htmlFor='emailConfirmed'>¿Email confirmado?</label>
+              <input
+                type='checkbox'
+                name='emailConfirmed'
+                id='emailConfirmed'
+                disabled
+                value={email_verified === 'true' ? true : false}
+              />
+            </div>
+          </div>
 
-        <div>
-          <label htmlFor='avatarUrl'>Avatar URL</label>
-          <input type='text' value={avatarUrl} id={`avatarUrl`} disabled />
-        </div>
+          <div className='row'>
+            <div>
+              <label htmlFor='avatarUrl'>Avatar URL</label>
+              <input type='text' value={avatarUrl} id={`avatarUrl`} disabled />
+            </div>
 
-        <div>
-          <img src={avatarUrl} alt='avatar' />
-        </div>
+            <div className='profile-image-container'>
+              <img src={avatarUrl} alt='avatar' />
+            </div>
+          </div>
 
-        <div>
-          <label htmlFor='password'>Old password</label>
-          <input
-            type='password'
-            value={password}
-            id={`password`}
-            onChange={(ev) => setPassword(ev.target.value)}
-          />
-        </div>
+          <div className='row'>
+            <div>
+              <label htmlFor='password'>Old password</label>
+              <input
+                type='password'
+                value={password}
+                id={`password`}
+                onChange={(ev) => setPassword(ev.target.value)}
+              />
+            </div>
 
-        <div>
-          <label htmlFor='new-password'>New password</label>
-          <input
-            type='password'
-            value={newPassword}
-            id={`new-password`}
-            onChange={(ev) => setNewPassword(ev.target.value)}
-          />
-        </div>
+            <div>
+              <label htmlFor='new-password'>New password</label>
+              <input
+                type='password'
+                value={newPassword}
+                id={`new-password`}
+                onChange={(ev) => setNewPassword(ev.target.value)}
+              />
+            </div>
+          </div>
 
-        <button type='submit'>Cambiar contraseña</button>
-      </form>
+          <button type='submit'>Cambiar contraseña</button>
+        </form>
+      </div>
     </div>
   );
 };

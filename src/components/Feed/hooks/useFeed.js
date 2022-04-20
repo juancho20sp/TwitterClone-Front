@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 // Elements
 import swal from 'sweetalert';
@@ -12,17 +12,22 @@ import {
 const useFeed = () => {
   const dispatch = useDispatch();
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const fetchData = async () => {
-      try {
-        let data = await fetch(`${process.env.REACT_APP_BASE_URL}/feed`);
-        data = await data.json();
-    
-        return data;
-      } catch (err) {
-        console.error(err);
-        throw new Error(err);
-      }
-    };
+    setIsLoading(true);
+    try {
+      let data = await fetch(`${process.env.REACT_APP_BASE_URL}/feed`);
+      data = await data.json();
+  
+      return data;
+    } catch (err) {
+      console.error(err);
+      throw new Error(err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const storeFetchedData = (data) => {
     dispatch(setFetchedTweets(data));
@@ -39,7 +44,8 @@ const useFeed = () => {
   return {
       fetchData,
       storeFetchedData,
-      showErrorOnFeedLoad
+      showErrorOnFeedLoad,
+      isLoading
   }
 }
 
