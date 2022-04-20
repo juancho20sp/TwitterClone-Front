@@ -3,7 +3,6 @@
 This is a twitter clone created with React.js and based on [Mert Çankaya's](https://github.com/MertCankaya/Twitter-Clone) twitter clone. It's created with React.js, React Router and Redux.
 
 ## Run the project
----
 - Clone the repo
 ```bash
 git clone https://github.com/juancho20sp/AREP-TwitterClone-Front
