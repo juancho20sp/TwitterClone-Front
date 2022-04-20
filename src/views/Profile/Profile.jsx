@@ -98,7 +98,7 @@ const Profile = () => {
                 name='emailConfirmed'
                 id='emailConfirmed'
                 disabled
-                value={email_verified === 'true' ? true : false}
+                checked={email_verified === 'true' ? true : false}
               />
             </div>
           </div>
