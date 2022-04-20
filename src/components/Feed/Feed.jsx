@@ -3,55 +3,55 @@ import React, { useEffect, useState } from 'react';
 import './Feed.css';
 import { Post, TweetBox } from '..';
 
+// Redux
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  addTweet as addTweetRedux,
+  fetchTweets,
+} from '../../redux/slices/postsSlice';
+
 // Utils
 import { post } from '../../utils';
 
 // Elements
 import swal from 'sweetalert';
 
-// {
-//   avatar:
-//     'https://www.pngfind.com/pngs/m/7-71783_pepe-the-frog-smirk-pepe-hd-png-download.png',
-//   displayName: 'El Pepe',
-//   image: '',
-//   text: 'Como eeeees',
-//   username: 'ElPepe',
-//   verified: true,
-// },
-
 function Feed() {
-  const [posts, setPosts] = useState([]);
+  // const [posts, setPosts] = useState([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        let data = await fetch(`${process.env.REACT_APP_BASE_URL}/feed`);
-        data = await data.json();
+  const dispatch = useDispatch();
+  const posts = useSelector((state) => state.posts.posts);
 
-        return data;
-      } catch (err) {
-        console.error(err);
-        throw new Error(err);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       let data = await fetch(`${process.env.REACT_APP_BASE_URL}/feed`);
+  //       data = await data.json();
 
-    fetchData()
-      .then((data) => {
-        setPosts((posts) => [...data, ...posts]);
-      })
-      .catch((err) => {
-        swal(
-          'No podemos cargar tu feed',
-          'Inténtalo nuevamente o ponte en contacto con los administradores del sitio :c',
-          'error'
-        );
-      });
-  }, []);
+  //       return data;
+  //     } catch (err) {
+  //       console.error(err);
+  //       throw new Error(err);
+  //     }
+  //   };
+
+  //   fetchData()
+  //     .then((data) => {
+  //       setPosts((posts) => [...data, ...posts]);
+  //     })
+  //     .catch((err) => {
+  //       swal(
+  //         'No podemos cargar tu feed',
+  //         'Inténtalo nuevamente o ponte en contacto con los administradores del sitio :c',
+  //         'error'
+  //       );
+  //     });
+  // }, []);
 
   const addTweet = (tweet) => {
     try {
       post(`${process.env.REACT_APP_BASE_URL}/post`, tweet).then((newTweet) => {
-        setPosts((posts) => [...newTweet, ...posts]);
+        dispatch(addTweetRedux(newTweet));
       });
     } catch (err) {
       swal(
