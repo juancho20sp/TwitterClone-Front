@@ -19,7 +19,6 @@ npm run start
 
 ```  
 ## Amazon Cognito
----
 All the login integration is created with AWS Cognito.
 
 
