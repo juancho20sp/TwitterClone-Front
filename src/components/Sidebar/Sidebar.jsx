@@ -19,10 +19,12 @@ import { useNavigate } from 'react-router-dom';
 
 // Hooks
 import { useAccount } from '../../utils/aws/hooks';
+import { useFeed } from '../Feed/hooks';
 
 function Sidebar() {
   const navigate = useNavigate();
   const { logout } = useAccount();
+  const { fetchData, storeFetchedData, showErrorOnFeedLoad } = useFeed();
 
   const handleProfile = (event) => {
     event.preventDefault();
@@ -39,8 +41,13 @@ function Sidebar() {
   const handleLoadMore = (event) => {
     event.preventDefault();
 
-    // $
-    console.log('Loading more tweets...');
+    fetchData()
+      .then((data) => {
+        storeFetchedData(data);
+      })
+      .catch((err) => {
+        showErrorOnFeedLoad();
+      });
   };
 
   return (

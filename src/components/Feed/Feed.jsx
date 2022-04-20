@@ -7,58 +7,46 @@ import { Post, TweetBox } from '..';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   addTweet as addTweetRedux,
-  fetchTweets,
+  setFetchedTweets,
 } from '../../redux/slices/postsSlice';
+
+// Hooks
+import { useFeed } from './hooks';
 
 // Utils
 import { post } from '../../utils';
 
-// Elements
-import swal from 'sweetalert';
-
 function Feed() {
-  // const [posts, setPosts] = useState([]);
-
   const dispatch = useDispatch();
+  const { fetchData, storeFetchedData, showErrorOnFeedLoad } = useFeed();
+
   const posts = useSelector((state) => state.posts.posts);
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       let data = await fetch(`${process.env.REACT_APP_BASE_URL}/feed`);
-  //       data = await data.json();
-
-  //       return data;
-  //     } catch (err) {
-  //       console.error(err);
-  //       throw new Error(err);
-  //     }
-  //   };
-
-  //   fetchData()
-  //     .then((data) => {
-  //       setPosts((posts) => [...data, ...posts]);
-  //     })
-  //     .catch((err) => {
-  //       swal(
-  //         'No podemos cargar tu feed',
-  //         'Inténtalo nuevamente o ponte en contacto con los administradores del sitio :c',
-  //         'error'
-  //       );
-  //     });
-  // }, []);
+  useEffect(() => {
+    fetchData()
+      .then((data) => {
+        storeFetchedData(data);
+      })
+      .catch((err) => {
+        showErrorOnFeedLoad();
+      });
+  }, []);
 
   const addTweet = (tweet) => {
     try {
       post(`${process.env.REACT_APP_BASE_URL}/post`, tweet).then((newTweet) => {
         dispatch(addTweetRedux(newTweet));
+
+        fetchData()
+          .then((data) => {
+            storeFetchedData(data);
+          })
+          .catch((err) => {
+            showErrorOnFeedLoad();
+          });
       });
     } catch (err) {
-      swal(
-        'Algo salió mal',
-        'Inténtalo nuevamente o ponte en contacto con los administradores del sitio :c',
-        'error'
-      );
+      showErrorOnFeedLoad();
     }
   };
 
