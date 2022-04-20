@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 import './Feed.css';
 import { Post, TweetBox } from '..';
 
 // Redux
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  addTweet as addTweetRedux,
-  setFetchedTweets,
-} from '../../redux/slices/postsSlice';
+import { addTweet as addTweetRedux } from '../../redux/slices/postsSlice';
 
 // Hooks
 import { useFeed } from './hooks';
