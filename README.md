@@ -1,130 +1,41 @@
 # Twitter Clone with ReactJS
 
-This is a twitter clone created with React.js and based on [Mert Çankaya's](https://github.com/MertCankaya/Twitter-Clone) twitter clone.
+This is a twitter clone created with React.js and based on [Mert Çankaya's](https://github.com/MertCankaya/Twitter-Clone) twitter clone. It's created with React.js, React Router and Redux.
 
-## Architecture
-
+## Run the project
 ---
-
-![](img/architecture.png)
-
-This is a simple _Client-Server_ architecture using an **APIRest** approach. The **backend** is a Spark application dockerized that exposes two endpoints that the **frontend** consumes (GET and POST on the same endpoint). The communication is based on the REST protocol using **JSON** as standard for sending and receiving messages.
-
-The **frontend** is served in a docker container which uses de **nginx** image as base, the **backend** is served in a docker container using the **openjdk:8** image and the **database** is served in a docker container which uses the **mongo:3.6.1** image.
-
-## Round Robin
-
-All the logic regarding to _Round Robin Traffic Balancer_ is done in the **Frontend** container. In the file Frontend/js/script.js you will find a function called **_rotateServer_** which is the function that switches between the _Backend_ containers.
-
-### Evidence
-
-- Project Working:
-  ![](img/MessagesWorking.png)
-
-- Round Robin:
-- ![](img/RoundRobin2.png)
-- ![](img/RoundRobin1.png)
-
-### API
-
----
-
-**Base URL (local)**
-
-```url
-http://localhost:8087
-```
-
-**Base URL (AWS)**
-
-```url
-http://ec2-3-91-195-184.compute-1.amazonaws.com/
-```
-
-### ENDPOINTS
-
----
-
-For getting all the messages, make a **GET** request to this endpoint:
-
-```url
-/api/v1/messages
-```
-
-For sending a new message, make a **POST** request to this endpoint:
-
-```url
-/api/v1/messages
-```
-
-### REQUESTS
-
----
-
-To send a new message to the application using an HTTP Client such as _postman_ you must send the body of the **POST** request in a format like this:
-
-```json
-{
-  "text": "Your message here"
-}
-```
-
-### LINKS
-
----
-
-**Backend**
-Local:
-
-```url
-http://localhost:8087
-```
-
-AWS:
-
-```url
-http://ec2-3-91-195-184.compute-1.amazonaws.com:8087 | 8088 | 8089
-```
-
-**Frontend**
-
-Local:
-
-```url
-http://localhost:80
-```
-
-AWS:
-
-```url
-http://ec2-3-91-195-184.compute-1.amazonaws.com/:80
-```
-
-## Run the project locally!
-
----
-
-Download or clone the project and run:
-
+- Clone the repo
 ```bash
-mvn compile
-mvn package
+git clone https://github.com/juancho20sp/AREP-TwitterClone-Front
 ```
 
-Then, open a _terminal_ and make sure to run the **docker service** and run:
-
+- Go to the project directory and install the required dependencies and modules
 ```bash
-docker-compose up
-```
+cd AREP-TwitterClone-Front
+npm install
+``` 
+- Run the project
+```bash
+npm run start
 
-- If it does'nt work, run the command with **sudo** priviledges.
+```  
+## Amazon Cognito
+---
+All the login integration is created with AWS Cognito.
+
+
+## Production project
+---
+**AWS Cloudfront URL**
+```url
+https://d1ys6vpdvt5zns.cloudfront.net
+```
 
 ## Built With
 
-- [Spark](https://sparkjava.com/) - As the Java framework for the backend.
-- HTML and CSS - As the main technologies for developing the UI.
-- [JavaScript](https://developer.mozilla.org/es/docs/Web/JavaScript) - As the language used in the client for creating experiences and handling user events.
-- Docker and docker-compose - As tools for orchestating the containers.
+- [React.js](https://es.reactjs.org/) - As main frontend framework.
+- [Redux.ks](https://es.redux.js.org/) - As state management tool.
+- [React Router](https://reactrouter.com/) - As client side router.
 
 ## Authors
 
