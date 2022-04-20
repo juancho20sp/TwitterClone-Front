@@ -126,7 +126,7 @@ docker-compose up
 - [JavaScript](https://developer.mozilla.org/es/docs/Web/JavaScript) - As the language used in the client for creating experiences and handling user events.
 - Docker and docker-compose - As tools for orchestating the containers.
 
-## Author
+## Authors
 
 - **Mert Çankaya** - Base project.
 - **Laura Valentina García León** - [Github](https://github.com/laura-gar)<br/>
@@ -139,5 +139,3 @@ docker-compose up
 ## License
 
 This is an _open source_ project.
-
-## Author
